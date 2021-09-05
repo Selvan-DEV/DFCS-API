@@ -1,4 +1,5 @@
-﻿using CRM_Dashboard.Models;
+﻿using CRM_Dashboard.Helpers;
+using CRM_Dashboard.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -52,9 +53,12 @@ namespace CRM_Dashboard.LeadsData
             return _leadContext.Leads.Find(Id);
         }
 
-        public List<Lead> GetLeads()
+        public PagedList<Lead> GetLeads(LeadsParameters leadsParameters) 
         {
-            return _leadContext.Leads.ToList();
+            //return _leadContext.Leads.Skip((leadsParameters.PageNumber - 1) * leadsParameters.PageSize)
+            //    .Take(leadsParameters.PageSize).ToList();
+
+            return PagedList<Lead>.ToPagedList(_leadContext.Leads, leadsParameters.PageNumber, leadsParameters.PageSize);
         }
     }
 }

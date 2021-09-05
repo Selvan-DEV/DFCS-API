@@ -1,4 +1,5 @@
-﻿using CRM_Dashboard.Models;
+﻿using CRM_Dashboard.Helpers;
+using CRM_Dashboard.Models;
 using System;
 using System.Collections.Generic;
 
@@ -7,7 +8,7 @@ namespace CRM_Dashboard.LeadsData
 
    public interface ILeadsData
     {
-        List<Lead> GetLeads();
+        PagedList<Lead> GetLeads(LeadsParameters leadsParamerters);
 
         Lead GetLead(Guid Id);
 

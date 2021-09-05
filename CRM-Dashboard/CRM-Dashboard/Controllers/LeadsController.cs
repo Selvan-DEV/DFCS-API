@@ -1,6 +1,7 @@
 ﻿using CRM_Dashboard.LeadsData;
 using CRM_Dashboard.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 
 namespace CRM_Dashboard.Controllers
@@ -18,9 +19,21 @@ namespace CRM_Dashboard.Controllers
         //Get Lead List
         [HttpGet]
         [Route("api/[controller]")]
-        public IActionResult GetLeads()
+        public IActionResult GetLeads([FromQuery] LeadsParameters leadParameters) 
         {
-            return Ok(_leadData.GetLeads());
+            var leads = _leadData.GetLeads(leadParameters);
+
+            var metaData = new
+            {
+                leads.TotalCount,
+                leads.PageSize,
+                leads.CurrentPage,
+                leads.HasNext,
+                leads.HasPrevious
+            };
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
+            return Ok(leads);
         }
         
         //Get Lead By Id
