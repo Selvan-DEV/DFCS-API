@@ -16,7 +16,7 @@ namespace CRM_Dashboard.LeadsData
         }
         public Lead AddLead(Lead lead)
         {
-            lead.Id = Guid.NewGuid();
+            lead.CustomerId = Guid.NewGuid();
             lead.CreatedAt = DateTime.Now;
             _leadContext.Leads.Add(lead);
             _leadContext.SaveChanges();
@@ -31,7 +31,7 @@ namespace CRM_Dashboard.LeadsData
 
         public Lead EditLead(Lead lead)
         {
-            var existingLead = _leadContext.Leads.Find(lead.Id);
+            var existingLead = _leadContext.Leads.Find(lead.CustomerId);
             if(existingLead != null)
             {
                 existingLead.Name = lead.Name;
@@ -50,14 +50,21 @@ namespace CRM_Dashboard.LeadsData
 
         public Lead GetLead(Guid Id)
         {
-            return _leadContext.Leads.Find(Id);
+            return _leadContext.Leads
+                .FromSqlRaw<Lead>("spGetLeadById {0}", Id)
+                .ToList()
+                .FirstOrDefault();
+        }
+
+        public List<Lead> GetLeadByStatus(string leadStatus)
+        {
+            return _leadContext.Leads
+                .FromSqlRaw<Lead>("spGetLeadByStatus {0}", leadStatus)
+                .ToList();
         }
 
         public PagedList<Lead> GetLeads(LeadsParameters leadsParameters) 
         {
-            //return _leadContext.Leads.Skip((leadsParameters.PageNumber - 1) * leadsParameters.PageSize)
-            //    .Take(leadsParameters.PageSize).ToList();
-
             return PagedList<Lead>.ToPagedList(_leadContext.Leads, leadsParameters.PageNumber, leadsParameters.PageSize);
         }
     }

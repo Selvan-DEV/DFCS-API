@@ -50,7 +50,22 @@ namespace CRM_Dashboard.Controllers
 
             return NotFound($"Lead with Id: {id} was not found");
         }
-        
+
+        //Get Lead By Status
+        [HttpGet]
+        [Route("api/[controller]/status")]
+        public IActionResult GetLeadByStatus([FromQuery] string leadsStatus)
+        {
+            var lead = _leadData.GetLeadByStatus(leadsStatus);
+
+            if (lead != null)
+            {
+                return Ok(lead);
+            }
+
+            return NotFound($"Lead with Status: {leadsStatus} was not found");
+        }
+
         //Add Lead
         [HttpPost]
         [Route("api/[controller]/create")]
@@ -58,7 +73,7 @@ namespace CRM_Dashboard.Controllers
         {
            _leadData.AddLead(lead);
             return Created(HttpContext.Request.Scheme + "://" + HttpContext.Request.Host +
-                HttpContext.Request.Path + "/" + lead.Id, lead);
+                HttpContext.Request.Path + "/" + lead.CustomerId, lead);
         }
         
         //Delete Lead
@@ -85,7 +100,7 @@ namespace CRM_Dashboard.Controllers
 
             if (existingLead != null)
             {
-                lead.Id = existingLead.Id;
+                lead.CustomerId = existingLead.CustomerId;
                 _leadData.EditLead(lead);
             }
             return Ok(lead);
