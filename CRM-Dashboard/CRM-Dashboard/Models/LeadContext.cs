@@ -11,5 +11,7 @@ namespace CRM_Dashboard.Models
         }
 
         public DbSet<Lead> Leads { get; set; }
+
+        public DbSet<CustomerPersonalData> Leads_Customer_PersonalData { get; set; }
     }
 }

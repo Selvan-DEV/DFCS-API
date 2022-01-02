@@ -1,4 +1,6 @@
-﻿using CRM_Dashboard.Models;
+﻿using CRM_Dashboard.Helpers;
+using CRM_Dashboard.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,13 @@ namespace CRM_Dashboard.LeadsData
 {
     public class Customers : ICustomersData
     {
+        private readonly LeadContext _customerContext;
+
+        public Customers(LeadContext customerContext)
+        {
+            _customerContext = customerContext;
+        }
+
         public CustomerPersonalData AddCustomer(CustomerPersonalData customerPersonalData)
         {
             throw new NotImplementedException();
@@ -28,9 +37,9 @@ namespace CRM_Dashboard.LeadsData
             throw new NotImplementedException();
         }
 
-        public List<CustomerPersonalData> GetCustomers()
+        public List<CustomerPersonalData> GetCustomers(LeadsParameters leadsParameters)
         {
-            throw new NotImplementedException();
+            return PagedList<CustomerPersonalData>.ToPagedList(_customerContext.Leads_Customer_PersonalData, leadsParameters.PageNumber, leadsParameters.PageSize);
         }
     }
 }

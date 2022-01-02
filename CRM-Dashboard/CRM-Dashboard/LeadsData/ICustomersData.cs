@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CRM_Dashboard.LeadsData
 {
-    interface ICustomersData
+    public interface ICustomersData
     {
-        List<CustomerPersonalData> GetCustomers();
+        List<CustomerPersonalData> GetCustomers(LeadsParameters leadsParamerters);
 
         CustomerPersonalData GetCustomer(int Id);
 

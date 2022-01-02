@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CRM_Dashboard.LeadsData;
+using CRM_Dashboard.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +15,27 @@ namespace CRM_Dashboard.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
+        private ICustomersData _customerData;
+        public CustomersController(ICustomersData customersData)
+        {
+            _customerData = customersData;
+        }
+
+        
         // GET: api/<CustomersController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromQuery] LeadsParameters leadParameters)
         {
-            return new string[] { "value1", "value2" };
+            var customers = _customerData.GetCustomers(leadParameters);
+            return Ok(customers);
+
         }
 
         // GET api/<CustomersController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
+            //var customer = _leadData.GetLead(id);
             return "value";
         }
 

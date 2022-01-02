@@ -27,7 +27,7 @@ namespace CRM_Dashboard.Models
 
         public DateTime SignUpDate { get; set; }
 
-        public int Phone { get; set; }
+        public string Phone { get; set; }
 
         public string StreatAddress { get; set; }
 

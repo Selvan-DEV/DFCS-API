@@ -27,6 +27,7 @@ namespace CRM_Dashboard
                 Configuration.GetConnectionString("ContextConnectionString")));
 
             services.AddScoped<ILeadsData, Leads>();
+            services.AddScoped<ICustomersData, Customers>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
