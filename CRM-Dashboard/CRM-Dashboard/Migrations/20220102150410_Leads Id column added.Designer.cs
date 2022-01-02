@@ -4,14 +4,16 @@ using CRM_Dashboard.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CRM_Dashboard.Migrations
 {
     [DbContext(typeof(LeadContext))]
-    partial class LeadContextModelSnapshot : ModelSnapshot
+    [Migration("20220102150410_Leads Id column added")]
+    partial class LeadsIdcolumnadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

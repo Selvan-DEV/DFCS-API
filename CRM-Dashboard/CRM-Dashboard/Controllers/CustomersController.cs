@@ -33,10 +33,16 @@ namespace CRM_Dashboard.Controllers
 
         // GET api/<CustomersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(Guid id)
         {
-            //var customer = _leadData.GetLead(id);
-            return "value";
+            var customer = _customerData.GetCustomer(id);
+            if(customer != null)
+            {
+                return Ok(customer);
+            }
+
+            return NotFound($"Lead with Id: {id} was not found");
+
         }
 
         // POST api/<CustomersController>

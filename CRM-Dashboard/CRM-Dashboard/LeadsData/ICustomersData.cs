@@ -10,7 +10,7 @@ namespace CRM_Dashboard.LeadsData
     {
         List<CustomerPersonalData> GetCustomers(LeadsParameters leadsParamerters);
 
-        CustomerPersonalData GetCustomer(int Id);
+        CustomerPersonalData GetCustomer(Guid Id);
 
         CustomerPersonalData AddCustomer(CustomerPersonalData customerPersonalData);
 

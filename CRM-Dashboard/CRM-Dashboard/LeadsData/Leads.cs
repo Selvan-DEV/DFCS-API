@@ -48,7 +48,7 @@ namespace CRM_Dashboard.LeadsData
             return lead;
         }
 
-        public Lead GetLead(Guid Id)
+        public Lead GetLead(int Id)
         {
             return _leadContext.Leads
                 .FromSqlRaw<Lead>("spGetLeadById {0}", Id)

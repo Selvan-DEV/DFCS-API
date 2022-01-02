@@ -39,7 +39,7 @@ namespace CRM_Dashboard.Controllers
         //Get Lead By Id
         [HttpGet]
         [Route("api/[controller]/{id}")]
-        public IActionResult GetLead(Guid id)
+        public IActionResult GetLead(int id)
         {
             var lead = _leadData.GetLead(id);
 
@@ -79,7 +79,7 @@ namespace CRM_Dashboard.Controllers
         //Delete Lead
         [HttpDelete]
         [Route("api/[controller]/{id}/delete")]
-        public IActionResult DeleteLead(Guid id)
+        public IActionResult DeleteLead(int id)
         {
             var lead = _leadData.GetLead(id);
             if(lead != null)
@@ -94,7 +94,7 @@ namespace CRM_Dashboard.Controllers
         //Edit Lead
         [HttpPatch]
         [Route("api/[controller]/{id}/edit")]
-        public IActionResult EditLead(Guid id, Lead lead)
+        public IActionResult EditLead(int id, Lead lead)
         {
            var existingLead = _leadData.GetLead(id);
 

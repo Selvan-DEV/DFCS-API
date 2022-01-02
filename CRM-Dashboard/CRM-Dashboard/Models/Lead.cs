@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM_Dashboard.Models
 {
@@ -7,6 +8,9 @@ namespace CRM_Dashboard.Models
     {
         [Key]
         public Guid CustomerId { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(50, ErrorMessage = "Name can only be 50 Characters")]

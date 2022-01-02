@@ -32,14 +32,15 @@ namespace CRM_Dashboard.LeadsData
             throw new NotImplementedException();
         }
 
-        public CustomerPersonalData GetCustomer(int Id)
+        public CustomerPersonalData GetCustomer(Guid Id)
         {
-            throw new NotImplementedException();
+            return _customerContext.Leads_Customer_PersonalData
+                 .FromSqlRaw<CustomerPersonalData>("spGetCustomer {0}", Id).ToList().FirstOrDefault();
         }
 
         public List<CustomerPersonalData> GetCustomers(LeadsParameters leadsParameters)
         {
-            return PagedList<CustomerPersonalData>.ToPagedList(_customerContext.Leads_Customer_PersonalData, leadsParameters.PageNumber, leadsParameters.PageSize);
+           return PagedList<CustomerPersonalData>.ToPagedList(_customerContext.Leads_Customer_PersonalData, leadsParameters.PageNumber, leadsParameters.PageSize);
         }
     }
 }
