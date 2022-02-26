@@ -33,7 +33,7 @@ namespace CRM_Dashboard.Controllers
 
         // GET api/<CustomersController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(Guid id)
+        public IActionResult Get(int id)
         {
             var customer = _customerData.GetCustomer(id);
             if(customer != null)
@@ -47,20 +47,36 @@ namespace CRM_Dashboard.Controllers
 
         // POST api/<CustomersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public CreatedResult Post([FromBody] CustomerPersonalData value)
         {
+            if(value.CustomerId != null)
+            {
+                _customerData.AddCustomer(value);
+            }
+            return Created(HttpContext.Request.Scheme + "://" + HttpContext.Request.Host +
+               HttpContext.Request.Path + "/" + value.CustomerId, value);
         }
 
         // PUT api/<CustomersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] CustomerPersonalData value)
         {
+            var existingCustomer = _customerData.GetCustomer(id);
+
+            if (existingCustomer != null)
+            {
+                value.Id = id;
+                _customerData.EditCustomer(value);
+            }
         }
 
         // DELETE api/<CustomersController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+           
+        
+           
         }
     }
 }

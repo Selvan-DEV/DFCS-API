@@ -19,7 +19,11 @@ namespace CRM_Dashboard.LeadsData
 
         public CustomerPersonalData AddCustomer(CustomerPersonalData customerPersonalData)
         {
-            throw new NotImplementedException();
+            customerPersonalData.CreatedAt = DateTime.Now;
+            _customerContext.Leads_Customer_PersonalData.Add(customerPersonalData);
+            _customerContext.SaveChanges();
+            return customerPersonalData;
+
         }
 
         public void DeleteCustomer(CustomerPersonalData customerPersonalData)
@@ -32,7 +36,7 @@ namespace CRM_Dashboard.LeadsData
             throw new NotImplementedException();
         }
 
-        public CustomerPersonalData GetCustomer(Guid Id)
+        public CustomerPersonalData GetCustomer(int Id)
         {
             return _customerContext.Leads_Customer_PersonalData
                  .FromSqlRaw<CustomerPersonalData>("spGetCustomer {0}", Id).ToList().FirstOrDefault();

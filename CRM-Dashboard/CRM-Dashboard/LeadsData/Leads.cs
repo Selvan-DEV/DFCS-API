@@ -18,6 +18,7 @@ namespace CRM_Dashboard.LeadsData
         {
             lead.CustomerId = Guid.NewGuid();
             lead.CreatedAt = DateTime.Now;
+            lead.UpdatedAt = DateTime.Now;
             _leadContext.Leads.Add(lead);
             _leadContext.SaveChanges();
             return lead;

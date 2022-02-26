@@ -23,9 +23,9 @@ namespace CRM_Dashboard.Models
 
         public int EstateNumber { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public DateTime SignUpDate { get; set; }
+        public DateTime? SignUpDate { get; set; }
 
         public string Phone { get; set; }
 
@@ -35,7 +35,7 @@ namespace CRM_Dashboard.Models
 
         public Guid CustomerId { get; set; }
 
-        public string email { get; set; }
+        public string Email { get; set; }
 
         public string Gender { get; set; }
 
@@ -53,7 +53,7 @@ namespace CRM_Dashboard.Models
 
         public string Education { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public string SpouseOccupation { get; set; }
 
@@ -63,7 +63,7 @@ namespace CRM_Dashboard.Models
 
         public int NoOfDependents { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
     }
 }
